@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TakeVideoActivity">
+
+    <com.loe.camera.CameraXCustomPreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/layoutContent1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#44000000"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:paddingHorizontal="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/videoBack"
+                android:layout_width="0dp"
+                android:layout_height="78dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:padding="20dp"
+                android:src="@drawable/camera_video_back" />
+
+            <ImageView
+                android:id="@+id/videoOk"
+                android:layout_width="0dp"
+                android:layout_height="78dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:padding="20dp"
+                android:src="@drawable/camera_button_ok" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layoutContent0"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="143dp"
+            android:text="00:00"
+            android:visibility="gone"
+            android:textColor="#fff"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/imageLight"
+            android:layout_width="67dp"
+            android:layout_height="65dp"
+            android:scaleX="0.92"
+            android:clickable="true"
+            android:padding="20dp"
+            android:src="@drawable/camera_light_0" />
+
+        <ImageView
+            android:id="@+id/imageSwitch"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="1dp"
+            android:clickable="true"
+            android:padding="20dp"
+            android:src="@drawable/camera_switch" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="35dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageBack"
+                    android:layout_width="70dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:padding="20dp"
+                    android:src="@drawable/camera_back" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp">
+
+                <FrameLayout
+                    android:id="@+id/layoutRecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/camera_record_bg"
+                    android:clickable="true"
+                    android:padding="6dp">
+
+                    <ImageView
+                        android:id="@+id/buttonRecord"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/camera_record_0" />
+                </FrameLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageAlbum"
+                    android:layout_width="70dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:padding="20dp"
+                    android:src="@drawable/camera_album" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
