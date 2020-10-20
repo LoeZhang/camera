@@ -6,7 +6,7 @@ public class VideoConfig implements Serializable
 {
     public static final String KEY = "config";
 
-    private int bitRate = 2000;
+    private int bitRate = 3000;
 
     private boolean isFront = false;
 

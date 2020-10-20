@@ -84,15 +84,10 @@ public class TakeVideoActivity extends AppCompatActivity
             window.setNavigationBarColor(Color.parseColor("#cc000000"));
             statusHeight = dp_px(22);
         }
-        setContentView(R.layout.take_video_activity);
+        setContentView(R.layout.camera_take_video_activity);
 
-        try
-        {
-            config = (VideoConfig) getIntent().getSerializableExtra(VideoConfig.KEY);
-        }catch (Exception e)
-        {
-            config = new VideoConfig();
-        }
+        config = (VideoConfig) getIntent().getSerializableExtra(VideoConfig.KEY);
+        if(config == null) config = new VideoConfig();
 
         padding0 = dp_px(6);
         padding1 = dp_px(17);

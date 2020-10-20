@@ -27,14 +27,14 @@ public class CameraFocusView extends AppCompatImageView {
 
     public CameraFocusView(Context context) {
         super(context);
-        mAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.focusview_show);
+        mAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.camera_focusview_show);
         setVisibility(View.GONE);
         mHandler = new Handler();
     }
 
     public CameraFocusView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.focusview_show);
+        mAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.camera_focusview_show);
         mHandler = new Handler();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CameraFocusView);

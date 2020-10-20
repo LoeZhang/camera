@@ -2,13 +2,11 @@ package com.loe.camera;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
-import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.FocusMeteringAction;
 import androidx.camera.core.FocusMeteringResult;
@@ -33,7 +30,6 @@ import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.MeteringPointFactory;
 import androidx.camera.core.Preview;
-import androidx.camera.core.impl.CameraInfoInternal;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -87,15 +83,10 @@ public class TakePhotoActivity extends AppCompatActivity
             window.setNavigationBarColor(Color.parseColor("#cc000000"));
             statusHeight = dp_px(22);
         }
-        setContentView(R.layout.take_photo_activity);
+        setContentView(R.layout.camera_take_photo_activity);
 
-        try
-        {
-            config = (PhotoConfig) getIntent().getSerializableExtra(VideoConfig.KEY);
-        } catch (Exception e)
-        {
-            config = new PhotoConfig();
-        }
+        config = (PhotoConfig) getIntent().getSerializableExtra(VideoConfig.KEY);
+        if(config == null) config = new PhotoConfig();
 
         initEvent();
 

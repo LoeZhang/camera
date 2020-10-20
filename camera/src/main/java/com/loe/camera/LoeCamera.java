@@ -74,13 +74,13 @@ public class LoeCamera
         @Override
         public void onEnter(Activity activity)
         {
-            activity.overridePendingTransition(R.anim.scale_in, R.anim.on);
+            activity.overridePendingTransition(R.anim.camera_scale_in, R.anim.camera_on);
         }
 
         @Override
         public void onOut(Activity activity)
         {
-            activity.overridePendingTransition(R.anim.on, R.anim.scale_out);
+            activity.overridePendingTransition(R.anim.camera_on, R.anim.camera_scale_out);
         }
     };
 
