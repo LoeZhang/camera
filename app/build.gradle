@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.github.LoeZhang:mvp:0.6.2'
 
     implementation project(':camera')
+//    implementation 'com.github.LoeZhang:camera:0.1.1'
 }

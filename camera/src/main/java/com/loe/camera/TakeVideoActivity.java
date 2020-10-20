@@ -539,7 +539,7 @@ public class TakeVideoActivity extends AppCompatActivity
         isFront = false;
         stop();
         resetLight();
-        cameraProvider.unbindAll();
+//        cameraProvider.unbindAll();
         super.onPause();
     }
 
