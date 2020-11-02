@@ -26,4 +26,14 @@
         android:padding="15dp"
         android:layout_height="wrap_content"/>
 
+<!--    <SurfaceView-->
+<!--        android:id="@+id/surfaceView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="200dp"/>-->
+
+    <cn.jzvd.JzvdStd
+        android:id="@+id/jzVideo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
 </LinearLayout>

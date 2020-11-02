@@ -38,6 +38,8 @@ dependencies {
 
     implementation 'com.github.LoeZhang:mvp:0.6.2'
 
+    implementation 'com.github.LoeZhang:videoplayer:0.2.0'
+
     implementation project(':camera')
 //    implementation 'com.github.LoeZhang:camera:0.1.1'
 }
