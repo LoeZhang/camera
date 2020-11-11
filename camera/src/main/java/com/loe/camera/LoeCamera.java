@@ -2,14 +2,73 @@ package com.loe.camera;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
+import android.widget.Toast;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import androidx.fragment.app.FragmentActivity;
 
 public class LoeCamera
 {
+    public static void takePhotoAlbum(final FragmentActivity activity, final OnPathCallback onPathCallback)
+    {
+        takePhotoAlbum(activity, new PhotoConfig(), onPathCallback);
+    }
+
+    public static void takePhotoAlbum(final FragmentActivity activity, final PhotoConfig config, final OnPathCallback onPathCallback)
+    {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        CameraResultUtil.startResult(activity, intent, new CameraResultUtil.OnActivityResultListener()
+        {
+            @Override
+            public void onActivityResult(int resultCode, Intent data)
+            {
+                if (resultCode == Activity.RESULT_OK && data != null)
+                {
+                    // 相册选择
+                    Uri uri = data.getData();
+                    // 选择返回
+                    if (uri != null)
+                    {
+                        try
+                        {
+                            // 得到全路径
+                            String path = CameraUriUtil.getUriPath(activity, uri);
+                            if (!config.isCompress())
+                            {
+                                onPathCallback.onPath(path);
+                            }
+                            else
+                            {
+                                String newPath = null;
+                                if (config.getSavePath() != null)
+                                {
+                                    newPath = config.getSavePath();
+                                }
+                                else
+                                {
+                                    newPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+                                            .getPath() + "/LoePhoto/" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.CHINA).format(System.currentTimeMillis()) + ".jpg";
+                                }
+                                CameraImgUtil.compressSize(path, newPath, config.getMaxWidth(), config.getMaxHeight(), config.getMaxSize());
+                                onPathCallback.onPath(newPath);
+                            }
+                        } catch (Exception e)
+                        {
+                            e.printStackTrace();
+                            Toast.makeText(activity, "保存出错", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     public static void takePhoto(FragmentActivity activity, final OnPathCallback onPathCallback)
     {
         takePhoto(activity, null, onPathCallback);
@@ -35,6 +94,41 @@ public class LoeCamera
         {
             onDestroyAnimate.onEnter(activity);
         }
+    }
+
+    public static void takeVideoAlbum(final FragmentActivity activity, final OnPathCallback onPathCallback)
+    {
+        takeVideoAlbum(activity, new VideoConfig(), onPathCallback);
+    }
+
+    public static void takeVideoAlbum(final FragmentActivity activity, VideoConfig config, final OnPathCallback onPathCallback)
+    {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("video/*");
+        CameraResultUtil.startResult(activity, intent, new CameraResultUtil.OnActivityResultListener()
+        {
+            @Override
+            public void onActivityResult(int resultCode, Intent data)
+            {
+                if (resultCode == Activity.RESULT_OK && data != null)
+                {
+                    try
+                    {
+                        // 相册选择
+                        Uri uri = data.getData();
+                        // 选择返回
+                        if (uri != null)
+                        {
+                            // 得到全路径
+                            String path = CameraUriUtil.getUriPath(activity, uri);
+                            onPathCallback.onPath(path);
+                        }
+                    } catch (Exception e)
+                    {
+                    }
+                }
+            }
+        });
     }
 
     public static void takeVideo(FragmentActivity activity, final OnPathCallback onPathCallback)

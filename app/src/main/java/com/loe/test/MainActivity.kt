@@ -32,9 +32,13 @@ class MainActivity : AppCompatActivity()
 
         buttonPhoto.setOnClickListener()
         {
-            LoeCamera.takePhoto(this, PhotoConfig()
-                .setFront(false)
-                .setShowAlbum(true))
+//            LoeCamera.takePhoto(this, PhotoConfig()
+//                .setFront(false)
+//                .setShowAlbum(true))
+//            {
+//                textView.text = it
+//            }
+            LoeCamera.takePhotoAlbum(this)
             {
                 textView.text = it
             }
