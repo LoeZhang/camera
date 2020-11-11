@@ -26,6 +26,12 @@
         android:padding="15dp"
         android:layout_height="wrap_content"/>
 
+    <Button
+        android:id="@+id/buttonOpen"
+        android:layout_width="match_parent"
+        android:text="打开"
+        android:layout_height="wrap_content"/>
+
 <!--    <SurfaceView-->
 <!--        android:id="@+id/surfaceView"-->
 <!--        android:layout_width="match_parent"-->

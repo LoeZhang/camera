@@ -1,9 +1,10 @@
 package com.loe.test
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.loe.camera.LoeCamera
-import com.loe.camera.PhotoConfig
 import com.loe.camera.VideoConfig
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity()
             }
         }
 
+        var url = "http://192.168.1.106/test/%E7%AB%A0%E8%B7%AF%E9%A1%BA-%E8%BD%AC%E6%AD%A3%E7%94%B3%E8%AF%B7%E8%A1%A8.docx";
+
         buttonPhoto.setOnClickListener()
         {
 //            LoeCamera.takePhoto(this, PhotoConfig()
@@ -38,10 +41,19 @@ class MainActivity : AppCompatActivity()
 //            {
 //                textView.text = it
 //            }
-            LoeCamera.takePhotoAlbum(this)
+
+
+            LoeCamera.takeFile(this)
             {
                 textView.text = it
+                url = it
             }
+        }
+
+        buttonOpen.setOnClickListener()
+        {
+
+            LoeCamera.open(this, url)
         }
 
 
