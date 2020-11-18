@@ -24,26 +24,26 @@ public class CameraUriUtil
         Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Images.Media._ID}, MediaStore.Images.Media.DATA + "=? ", new String
                 []{file.getName()}, null);
 
+        Uri uri = null;
+
         if (cursor != null && cursor.moveToFirst())
         {
             int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
             Uri baseUri = Uri.parse("content://media/external/images/media");
-            return Uri.withAppendedPath(baseUri, "" + id);
+            uri = Uri.withAppendedPath(baseUri, "" + id);
         }
-        else
+        else if (file.exists())
         {
-            if (file.exists())
-            {
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.Images.Media.DATA, filePath);
-                Uri uri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                return uri;
-            }
-            else
-            {
-                return null;
-            }
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.DATA, filePath);
+            uri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         }
+
+        if (uri == null)
+        {
+            uri = Uri.fromFile(file);
+        }
+        return uri;
     }
 
     @SuppressLint("NewApi")

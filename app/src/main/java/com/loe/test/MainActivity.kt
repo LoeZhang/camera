@@ -42,12 +42,20 @@ class MainActivity : AppCompatActivity()
 //                textView.text = it
 //            }
 
-
-            LoeCamera.takeFile(this)
+            LoeCamera.takePhoto(this)
             {
-                textView.text = it
-                url = it
+                LoeCamera.cropImage(this, it)
+                {
+                    textView.text = it
+                }
             }
+
+
+//            LoeCamera.takeFile(this)
+//            {
+//                textView.text = it
+//                url = it
+//            }
         }
 
         buttonOpen.setOnClickListener()
