@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -466,7 +467,7 @@ public class TakePhotoActivity extends AppCompatActivity
             setResult(RESULT_OK, new Intent().putExtra("path", newPath));
         } catch (Exception e)
         {
-            e.printStackTrace();
+            Log.e("runtime", e.toString());
             Toast.makeText(this, "保存出错", Toast.LENGTH_SHORT).show();
         }
         finish();
@@ -523,14 +524,6 @@ public class TakePhotoActivity extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
-        if (tempPath != null)
-        {
-            File tempFile = new File(tempPath);
-            if (tempFile.exists())
-            {
-                tempFile.delete();
-            }
-        }
         super.onDestroy();
     }
 }
