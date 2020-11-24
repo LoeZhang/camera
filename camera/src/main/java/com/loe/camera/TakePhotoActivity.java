@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.AspectRatio;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.FocusMeteringAction;
@@ -367,7 +368,9 @@ public class TakePhotoActivity extends AppCompatActivity
                     //                        }
                     //                    });
 
-                    imageCapture = new ImageCapture.Builder().build();//拍照用例配置
+                    imageCapture = new ImageCapture.Builder()
+                            .setTargetAspectRatio(AspectRatio.RATIO_16_9)
+                            .build();//拍照用例配置
 
                     cameraProvider.unbindAll(); //先解绑所有用例
                     camera = cameraProvider.bindToLifecycle(TakePhotoActivity.this, cameraSelector, imageCapture,
