@@ -392,7 +392,7 @@ public class TakeVideoActivity extends AppCompatActivity
     private void takeVideo()
     {
         // 视频保存路径
-        File tempFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/LoeVideo/temp.mp4");
+        File tempFile = new File(CameraImgUtil.getVideoTemp());
         if (!tempFile.getParentFile().exists())
         {
             tempFile.getParentFile().mkdirs();
@@ -487,8 +487,7 @@ public class TakeVideoActivity extends AppCompatActivity
                 newFile = new File(config.getSavePath());
             }else
             {
-                newFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                        .getPath() + "/LoeVideo/" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.CHINA).format(System.currentTimeMillis()) + ".mp4");
+                newFile = new File(CameraImgUtil.getVideoPath() + CameraImgUtil.getDate() + ".mp4");
             }
             if (!newFile.getParentFile().exists())
             {

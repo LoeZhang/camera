@@ -4,11 +4,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.os.Environment;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class CameraImgUtil
 {
@@ -197,5 +200,35 @@ public class CameraImgUtil
             }
         }
         return false;
+    }
+
+    public static String getPhotoPath()
+    {
+        return getDCIM() + "LoePhoto/";
+    }
+
+    public static String getPhotoTemp()
+    {
+        return getPhotoPath() + "temp.jpg";
+    }
+
+    public static String getVideoPath()
+    {
+        return getDCIM() + "LoeVideo/";
+    }
+
+    public static String getVideoTemp()
+    {
+        return getVideoPath() + "temp.mp4";
+    }
+
+    public static String getDCIM()
+    {
+        return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/";
+    }
+
+    public static String getDate()
+    {
+        return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.CHINA).format(System.currentTimeMillis());
     }
 }

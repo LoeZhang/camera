@@ -4,7 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.loe.camera.CameraImgUtil
 import com.loe.camera.LoeCamera
+import com.loe.camera.PhotoConfig
 import com.loe.camera.VideoConfig
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,14 +44,13 @@ class MainActivity : AppCompatActivity()
 //                textView.text = it
 //            }
 
-            LoeCamera.takePhoto(this)
+            LoeCamera.takePhoto(this, PhotoConfig().setSavePath(CameraImgUtil.getPhotoTemp()))
             {
                 LoeCamera.cropImage(this, it)
                 {
                     textView.text = it
                 }
             }
-
 
 //            LoeCamera.takeFile(this)
 //            {

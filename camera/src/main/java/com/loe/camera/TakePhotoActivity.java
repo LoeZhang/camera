@@ -388,7 +388,7 @@ public class TakePhotoActivity extends AppCompatActivity
     {
         buttonRecord.setEnabled(false);
         // 保存路径
-        final File tempFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/LoePhoto/temp.jpg");
+        final File tempFile = new File(CameraImgUtil.getPhotoTemp());
         if (!tempFile.getParentFile().exists())
         {
             tempFile.getParentFile().mkdirs();
@@ -460,8 +460,7 @@ public class TakePhotoActivity extends AppCompatActivity
             }
             else
             {
-                newPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                        .getPath() + "/LoePhoto/" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.CHINA).format(System.currentTimeMillis()) + ".jpg";
+                newPath = CameraImgUtil.getPhotoPath() + CameraImgUtil.getDate() + ".jpg";
             }
             CameraImgUtil.compressSize(tempFile.getAbsolutePath(), newPath, config.getMaxWidth(), config.getMaxHeight(), config.getMaxSize());
             setResult(RESULT_OK, new Intent().putExtra("path", newPath));

@@ -57,8 +57,7 @@ public class LoeCamera
                                 }
                                 else
                                 {
-                                    newPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                                            .getPath() + "/LoePhoto/" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.CHINA).format(System.currentTimeMillis()) + ".jpg";
+                                    newPath = CameraImgUtil.getPhotoPath() + CameraImgUtil.getDate() + ".jpg";
                                 }
                                 CameraImgUtil.compressSize(path, newPath, config.getMaxWidth(), config.getMaxHeight(), config.getMaxSize());
                                 onPathCallback.onPath(newPath);
@@ -122,8 +121,7 @@ public class LoeCamera
         }
         Uri uri = CameraUriUtil.fileToUri(activity, file);
 
-        String newPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                .getPath() + "/LoePhoto/" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.CHINA).format(System.currentTimeMillis()) + ".jpg";
+        String newPath = CameraImgUtil.getPhotoPath() + CameraImgUtil.getDate() + ".jpg";
         File newFile = new File(newPath);
         if (!newFile.getParentFile().exists())
         {
@@ -162,6 +160,7 @@ public class LoeCamera
                 } catch (Exception e)
                 {
                 }
+                clearPhotoTemp();
             }
         });
         if (onDestroyAnimate != null)
@@ -261,13 +260,22 @@ public class LoeCamera
 
     public static boolean clearPhoto()
     {
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/LoePhoto/";
+        String path = CameraImgUtil.getPhotoPath();
         return CameraImgUtil.delete(new File(path));
+    }
+
+    public static void clearPhotoTemp()
+    {
+        File tempFile = new File(CameraImgUtil.getPhotoTemp());
+        if (tempFile.exists())
+        {
+            tempFile.delete();
+        }
     }
 
     public static boolean clearVideo()
     {
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/LoeVideo/";
+        String path = CameraImgUtil.getVideoPath();
         return CameraImgUtil.delete(new File(path));
     }
 
@@ -336,14 +344,14 @@ public class LoeCamera
             {".3gp", "video/3gpp"}, {".apk", "application/vnd.android.package-archive"}, {".asf", "video/x-ms-asf"}, {".avi", "video/x-msvideo"}, {".bin", "application/octet-stream"}, {".bmp",
             "image/bmp"}, {".c", "text/plain"}, {".class", "application/octet-stream"}, {".conf", "text/plain"}, {".cpp", "text/plain"}, {".doc", "application/msword"}, {".docx", "application" +
             "/msword"}, {".exe", "application/octet-stream"}, {".gif", "image/gif"}, {".gtar", "application/x-gtar"}, {".gz", "application/x-gzip"}, {".h", "text/plain"}, {".htm", "text/html"}, {
-                ".html", "text/html"}, {".jar", "application/java-archive"}, {".java", "text/plain"}, {".jpeg", "image/jpeg"}, {".JPEG", "image/jpeg"}, {".jpg", "image/jpeg"}, {".js", "application" +
-            "/x-javascript"}, {".log", "text/plain"}, {".m3u", "audio/x-mpegurl"}, {".m4a", "audio/mp4a-latm"}, {".m4b", "audio/mp4a-latm"}, {".m4p", "audio/mp4a-latm"}, {".m4u", "video/vnd" +
-            ".mpegurl"}, {".m4v", "video/x-m4v"}, {".mov", "video/quicktime"}, {".mp2", "audio/x-mpeg"}, {".mp3", "audio/x-mpeg"}, {".mp4", "video/mp4"}, {".mpc", "application/vnd.mpohun" +
-            ".certificate"}, {".mpe", "video/mpeg"}, {".mpeg", "video/mpeg"}, {".mpg", "video/mpeg"}, {".mpg4", "video/mp4"}, {".mpga", "audio/mpeg"}, {".msg", "application/vnd.ms-outlook"}, {".ogg"
-            , "audio/ogg"}, {".pdf", "application/pdf"}, {".png", "image/png"}, {".pps", "application/vnd.ms-powerpoint"}, {".ppt", "application/vnd.ms-powerpoint"}, {".pptx", "application/vnd" +
-            ".ms-powerpoint"}, {".prop", "text/plain"}, {".rar", "application/x-rar-compressed"}, {".rc", "text/plain"}, {".rmvb", "audio/x-pn-realaudio"}, {".rtf", "application/rtf"}, {".sh",
-            "text/plain"}, {".tar", "application/x-tar"}, {".tgz", "application/x-compressed"}, {".txt", "text/plain"}, {".wav", "audio/x-wav"}, {".wma", "audio/x-ms-wma"}, {".wmv", "audio/x-ms-wmv"
-    }, {".wps", "application/vnd.ms-works"},
+                ".html", "text/html"}, {".jar", "application/java-archive"}, {".java", "text/plain"}, {".jpeg", "image/jpeg"}, {".JPEG", "image/jpeg"}, {".jpg", "image/jpeg"}, {".js",
+            "application" + "/x-javascript"}, {".log", "text/plain"}, {".m3u", "audio/x-mpegurl"}, {".m4a", "audio/mp4a-latm"}, {".m4b", "audio/mp4a-latm"}, {".m4p", "audio/mp4a-latm"}, {".m4u",
+            "video/vnd" + ".mpegurl"}, {".m4v", "video/x-m4v"}, {".mov", "video/quicktime"}, {".mp2", "audio/x-mpeg"}, {".mp3", "audio/x-mpeg"}, {".mp4", "video/mp4"}, {".mpc", "application/vnd" +
+            ".mpohun" + ".certificate"}, {".mpe", "video/mpeg"}, {".mpeg", "video/mpeg"}, {".mpg", "video/mpeg"}, {".mpg4", "video/mp4"}, {".mpga", "audio/mpeg"}, {".msg", "application/vnd" +
+            ".ms-outlook"}, {".ogg", "audio/ogg"}, {".pdf", "application/pdf"}, {".png", "image/png"}, {".pps", "application/vnd.ms-powerpoint"}, {".ppt", "application/vnd.ms-powerpoint"}, {".pptx"
+            , "application/vnd" + ".ms-powerpoint"}, {".prop", "text/plain"}, {".rar", "application/x-rar-compressed"}, {".rc", "text/plain"}, {".rmvb", "audio/x-pn-realaudio"}, {".rtf",
+            "application/rtf"}, {".sh", "text/plain"}, {".tar", "application/x-tar"}, {".tgz", "application/x-compressed"}, {".txt", "text/plain"}, {".wav", "audio/x-wav"}, {".wma", "audio/x-ms-wma"
+    }, {".wmv", "audio/x-ms-wmv"}, {".wps", "application/vnd.ms-works"},
             //{".xml",    "text/xml"},
             {".xml", "text/plain"}, {".z", "application/x-compress"}, {".zip", "application/zip"}, {"", "*/*"}};
 
